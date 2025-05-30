@@ -1,0 +1,601 @@
+:root {
+    --primary-blue: #4A90E2; /* Azul dos textos "BORA BEBER" */
+    --primary-pink: #E91E63; /* Rosa para destaque e botões */
+    --primary-green: #4CAF50; /* Verde para algumas seções */
+    --background-dark: #3E2723; /* Marrom escuro da madeira */
+    --text-light: #FDFDFD; /* Cor do texto claro */
+    --text-dark: #333; /* Cor do texto escuro nas bandejas */
+    --label-bg-light: #FFF; /* Fundo branco dos rótulos */
+    --label-bg-dark: #EEE; /* Fundo cinza claro dos rótulos */
+    --film-color: rgba(255, 255, 255, 0.4); /* Para o efeito de plástico */
+    --tray-blue-bg: #D1EEF8; /* Azul claro da bandeja */
+    --tray-pink-bg: #F8D1E6; /* Rosa claro da bandeja */
+    --tray-green-bg: #D1F8E6; /* Verde claro da bandeja */
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-dark); /* Fundo similar à madeira */
+    color: var(--text-light);
+    text-align: center;
+    overflow-x: hidden; /* Evita rolagem horizontal */
+    /* Textura de madeira - placeholder. Substitua pela URL de uma textura real. */
+    background-image: url("https://i.imgur.com/gfoRqGL.jpeg"); /* Ex: uma imagem de textura de madeira */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Para que o fundo não role com o conteúdo */
+    min-height: 100vh; /* Garante que o body ocupe a altura total da tela */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Layout responsivo */
+    align-items: stretch;
+    justify-content: center;
+}
+
+/* Seção do topo (BORA BEBER) */
+.hero-section {
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente para o texto */
+    padding: 40px 20px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    width: 100%; /* Ocupa a largura total */
+    box-sizing: border-box;
+}
+
+.hero-section h1 {
+    font-family: 'Permanent Marker', cursive; /* Estilo "rabisco" */
+    font-size: 4em;
+    color: var(--primary-blue); /* Cor azul vibrante */
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.hero-section p {
+    font-family: 'Bebas Neue', sans-serif; /* Fonte para a data */
+    font-size: 2em;
+    color: var(--text-light);
+    margin-top: 0;
+}
+
+.hero-section p span {
+    color: var(--primary-pink); /* Cor de destaque para a data */
+}
+
+/* Ícones no topo */
+.top-decor {
+    position: absolute;
+    top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 2; /* Acima do header */
+}
+
+.top-decor img {
+    width: 80px; /* Tamanho dos ícones */
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.4)); /* Sombra para destacar */
+}
+
+
+/* Estilo da bandeja */
+.tray {
+    background-color: #f0f0f0; /* Fundo claro da bandeja padrão */
+    border-radius: 10px;
+    padding: 25px;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Para o efeito de plástico */
+    z-index: 0;
+    border: 2px solid rgba(0,0,0,0.1);
+    min-height: 250px; /* Altura mínima para as bandejas */
+}
+
+.tray.blue { background-color: var(--tray-blue-bg); }
+.tray.pink { background-color: var(--tray-pink-bg); }
+.tray.green { background-color: var(--tray-green-bg); }
+
+/* Efeito de plástico filme */
+.tray::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, var(--film-color) 0%, transparent 50%, var(--film-color) 100%);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 10;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
+}
+
+.tray-content {
+    position: relative;
+    z-index: 11; /* Conteúdo por cima do plástico */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Centraliza o texto dentro da bandeja */
+}
+
+.tray h2 {
+    font-family: 'Anton', sans-serif;
+    color: var(--text-dark);
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tray img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 3px solid rgba(0,0,0,0.1);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.tray p, .tray ul {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--text-dark);
+    text-align: left;
+    width: 90%;
+    margin: 0 auto 10px;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.tray ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.tray li {
+    margin-bottom: 5px;
+}
+
+/* Rótulos de "preço" ou informações */
+.label {
+    background-color: var(--label-bg-light);
+    color: var(--text-dark);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85em;
+}
+
+.label.price {
+    background-color: #FFEB3B; /* Amarelo de preço */
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px dashed var(--text-dark); /* Borda pontilhada */
+}
+
+/* Imagem do Manoel Gonçalves */
+.manoel-img {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border: 5px solid var(--primary-pink); /* Borda destacada */
+    margin-bottom: 20px;
+}
+
+/* Selo "PRODUTO SEM VALIDADE" */
+.stamp {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: #FF5722; /* Laranja */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 0.9em;
+    transform: rotate(-10deg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 12; /* Por cima do plástico */
+}
+
+/* Frase final */
+.final-message {
+    color: var(--text-dark);
+    padding: 30px;
+    margin-top: 40px;
+    border-radius: 15px;
+    line-height: 1.4;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    transform: rotate(2deg); /* Leve inclinação */
+    position: relative; /* Para z-index */
+    z-index: 1; /* Para ficar acima do fundo */
+}
+
+.final-message span {
+    color: var(--primary-blue);
+}
+
+/* Estilo do formulário */
+.form-section {
+    background-color: var(--tray-pink-bg); /* Fundo da bandeja para o formulário */
+    padding: 25px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px solid rgba(0,0,0,0.1);
+    min-height: 250px;
+    grid-column: span 2; /* Ocupa duas colunas em telas maiores */
+}
+
+.form-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, var(--film-color) 0%, transparent 50%, var(--film-color) 100%);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 10;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
+}
+
+.form-content {
+    position: relative;
+    z-index: 11;
+    width: 90%;
+    text-align: center;
+}
+
+.form-section h2 {
+    font-family: 'Anton', sans-serif;
+    color: var(--text-dark);
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.form-section label {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--text-dark);
+    text-align: left;
+    margin-top: 15px;
+    font-size: 1.1em;
+    display: block;
+    width: 100%;
+}
+
+.form-section input[type="text"],
+.form-section input[type="tel"],
+.form-section input[type="email"],
+.form-section input[type="number"] {
+    width: calc(100% - 20px); /* Ajusta a largura para o padding */
+    padding: 12px 10px;
+    margin-top: 8px;
+    border: 2px solid var(--primary-blue);
+    border-radius: 8px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1em;
+    box-sizing: border-box; /* Inclui padding e borda na largura */
+    background-color: var(--label-bg-light);
+    color: var(--text-dark);
+}
+
+.form-section input[type="text"]:focus,
+.form-section input[type="tel"]:focus, 
+.form-section input[type="email"],
+.form-section input[type="number"]{
+    outline: none;
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 8px rgba(var(--primary-pink), 0.5);
+}
+
+.form-section button[type="submit"] {
+    display: inline-block;
+    background-color: var(--primary-pink);
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    width: auto; /* Ajusta a largura do botão */
+    padding-left: 40px; /* Mais padding para o botão */
+    padding-right: 40px;
+}
+
+.form-section button[type="submit"]:hover {
+    background-color: #C2185B;
+    transform: translateY(-3px);
+}
+
+.form-group-filhos {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    color: var(--text-dark);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.1em;
+}
+
+.form-group-filhos .radio-options {
+    display: flex;
+    gap: 20px; /* Espaço entre os botões Sim/Não */
+    margin-top: 8px;
+}
+
+.form-group-filhos label {
+    display: flex; /* Para alinhar o radio button e o texto */
+    align-items: center;
+    cursor: pointer;
+    font-size: 1em; /* Tamanho do texto Sim/Não */
+    color: var(--text-dark);
+}
+
+.form-group-filhos input[type="radio"] {
+    margin-right: 8px;
+    /* Estilos customizados para o radio button se desejar */
+}
+
+#msg {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--text-dark);
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Estilo do Rodapé com o mapa */
+.footer-map {
+    flex: 1;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente */
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    min-width: 300px;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    z-index: 1; /* Para ficar acima do fundo */
+}
+
+.footer-map h2 {
+    font-family: 'Anton', sans-serif;
+    color: var(--text-light);
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+.footer-map iframe {
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 600px; /* Limita a largura do mapa */
+    height: 300px;
+}
+
+.map-and-hosting-section {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem linha em telas menores */
+    gap: 30px; /* Espaço entre o mapa e a tabela */
+    justify-content: center; /* Centraliza os itens */
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 0 20px; /* Adiciona padding nas laterais */
+    box-sizing: border-box;
+}
+
+.hosting-info-panel {
+    flex: 1; /* Permite que o painel de hospedagem cresça */
+    min-width: 300px; /* Largura mínima para o painel */
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.hosting-info-panel h2 {
+    font-family: 'Anton', sans-serif;
+    color: var(--text-light);
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+.hosting-info-panel table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.hosting-info-panel th,
+.hosting-info-panel td {
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--text-light);
+    text-align: left;
+}
+
+.hosting-info-panel th {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.add-to-calendar-button {
+    display: flex; /* Transforma o botão em um flex container */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    background-color: var(--primary-blue); /* Um azul vibrante */
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2em; /* Um pouco menor que o de confirmação para diferenciar */
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px; /* Espaço do formulário */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    width: auto;
+    /* Remover padding-left/right fixo para que o flexbox gerencie */
+}
+
+.add-to-calendar-button:hover {
+    background-color: #3A7ABD; /* Um tom mais escuro ao passar o mouse */
+    transform: translateY(-3px);
+}
+
+.add-to-calendar-button img {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px;
+    margin-right: 10px; /* Espaçamento entre o ícone e o texto */
+    vertical-align: middle; /* Ajuda no alinhamento vertical (embora flexbox já ajude) */
+    border-radius: 0; /* Remover borda da imagem se houver herança */
+    box-shadow: none; /* Remover sombra da imagem se houver herança */
+}
+
+.add-to-calendar-button span {
+    /* Garante que o texto esteja alinhado corretamente com o ícone */
+    line-height: 1; /* Ajusta a altura da linha para o texto */
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column; /* Coloca os botões um abaixo do outro */
+    align-items: center; /* Centraliza os botões horizontalmente */
+    width: 100%; /* Ocupa a largura total para centralizar corretamente */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 3em;
+    }
+    .hero-section p {
+        font-size: 1.5em;
+    }
+    .container {
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
+        padding: 15px;
+    }
+    .tray, .form-section {
+        padding: 20px;
+        grid-column: span 1; /* Volta para coluna única em telas menores */
+    }
+    .tray h2, .form-section h2, .footer-map h2 {
+        font-size: 1.8em;
+    }
+    .manoel-img {
+        width: 150px;
+        height: 150px;
+    }
+    .final-message {
+        font-size: 1.4em;
+        padding: 20px;
+    }
+    .top-decor img {
+        width: 60px;
+    }
+    .form-section input[type="text"],
+    .form-section input[type="tel"],
+    .form-section input[type="email"],
+    .form-section input[type="number"],
+    .form-section button[type="submit"] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .map-and-hosting-section {
+        flex-direction: column; /* Coloca os painéis em coluna em telas menores */
+        align-items: center;
+        padding: 0 15px;
+    }
+
+    .footer-map, .hosting-info-panel {
+        width: 100%;
+        min-width: unset; /* Remove min-width para telas menores */
+        max-width: 600px; /* Limita a largura para melhor leitura */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section h1 {
+        font-size: 2.5em;
+    }
+    .hero-section p {
+        font-size: 1.2em;
+    }
+    .container {
+        margin: 20px auto;
+        gap: 20px;
+    }
+    .tray, .form-section {
+        padding: 15px;
+    }
+    .tray h2, .form-section h2, .footer-map h2 {
+        font-size: 1.5em;
+    }
+}
