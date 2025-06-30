@@ -529,6 +529,11 @@ body {
     width: 100%; /* Ocupa a largura total para centralizar corretamente */
 }
 
+a {
+    color: var(--text-dark);
+    text_decoration: none;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .hero-section h1 {
