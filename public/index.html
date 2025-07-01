@@ -1,227 +1,262 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <base target="_top">
-    <meta charset="UTF-8">
-    <title>Manoel Goncalves - Meu Aniversário!</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Anton&family=Roboto+Mono:wght@400;700&family=Bebas+Neue&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <base target="_top">
+  <meta charset="UTF-8">
+  <title>Manoel Goncalves - Meu Aniversário!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Anton&family=Roboto+Mono:wght@400;700&family=Bebas+Neue&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header class="hero-section">
-      <img src="https://i.imgur.com/afdxqoy.jpeg" style="max-width: 100%; height: auto;">
-    </header>
+<header class="hero-section">
+<img src="https://i.imgur.com/afdxqoy.jpeg" style="max-width: 100%; height: auto;">
+</header>
 
-    <main class="container">
+<main class="container">
 
-        <section class="tray blue">
-            <div class="tray-content">
-                <h2>DETALHES DA FESTA</h2>
-                <img src="https://i.imgur.com/H2Bm6E7.png" style="max-width: 50%;" loading="lazy"> <p><strong>Data:</strong> 19/07/2025</p>
-                <p><strong>Hora:</strong> A partir das 12h</p>
-                <p><strong>Local:</strong> Aver o Mar – Sirinhaém</p>
-                <p><strong>Recomendações:</strong> Levar crianças e roupa de banho!</p>
-                <div class="label price">DIVERSÃO GARANTIDA</div>
-            </div>
-        </section>
+  <section class="tray blue">
+    <div class="tray-content">
+    <h2>DETALHES DA FESTA</h2>
+    <img src="https://i.imgur.com/H2Bm6E7.png" style="max-width: 50%;" loading="lazy"> <p><strong>Data:</strong> 19/07/2025</p>
+    <p><strong>Hora:</strong> A partir das 12h</p>
+    <p><strong>Local:</strong> Aver o Mar – Sirinhaém</p>
+    <p><strong>Recomendações:</strong> Levar crianças e roupa de banho!</p>
+    <div class="label price">DIVERSÃO GARANTIDA</div>
+    </div>
+  </section>
 
-        <section class="tray green">
-            <div class="tray-content">
-                <h2>MANOEL GONÇALVES</h2>
-                <p>42 anos de qualidade</p>
-                <p><strong>Data de Fabricação</strong>: 15/07/1983</p>
-                <p><strong>Preço: Inestimável</strong></p>
-                <p><strong>Ingredientes</strong>: Cabuloso, Curioso, Visionário, Teimoso, Arretado, Pertubador, Chato, etc.</p>
-                <p><strong>Data de Validade</strong>: <span>15/07/2023</span></p>
-                <div class="label">EDIÇÃO ESPECIAL</div>
-                <div class="stamp">PRODUTO<br>FORA DA VALIDADE</div>
-            </div>
-        </section>
-                
-         <section class="form-section">
-            <div class="form-content">
-                
-                    <button type="submit"><a href= "https://forms.gle/S7ik1eTJEJ16yiip8">Confirmar Presença</a></button>
-                </form>
-                <p id="msg"></p>
-            </div>
-        </section
+  <section class="tray green">
+    <div class="tray-content">
+    <h2>MANOEL GONÇALVES</h2>
+    <p>42 anos de qualidade</p>
+    <p><strong>Data de Fabricação</strong>: 15/07/1983</p>
+    <p><strong>Preço: Inestimável</strong></p>
+    <p><strong>Ingredientes</strong>: Cabuloso, Curioso, Visionário, Teimoso, Arretado, Pertubador, Chato, etc.</p>
+    <p><strong>Data de Validade</strong>: <span>15/07/2023</span></p>
+    <div class="label">EDIÇÃO ESPECIAL</div>
+    <div class="stamp">PRODUTO<br>FORA DA VALIDADE</div>
+    </div>
+  </section>
 
-    </main>
+  <section class="form-section">
+    <div class="form-content">
+    <h2>CONFIRME SUA PRESENÇA</h2>
+    <form id="form-confirmacao">
+    <label>Nome:
+    <input name="nome" type="text" required>
+    </label>
+    <label>Telefone:
+    <input name="telefone" type="tel" required>
+    </label>
+    <label>E-mail:
+    <input name="email" type="email" required>
+    </label>
 
-    <footer class="final-message">
-        <img src="https://i.imgur.com/gDZikuL.png" style="max-width: 85%;" loading="lazy">
-    </footer>
+    <div class="form-group-filhos">
+    <label>Possui filhos?</label>
+    <div class="radio-options">
+    <label>
+    <input type="radio" name="possuiFilhos" value="Sim" id="possuiFilhosSim"> Sim
+    </label>
+    <label>
+    <input type="radio" name="possuiFilhos" value="Não" id="possuiFilhosNao" checked> Não
+    </label>
+    </div>
+    </div>
+    <div id="quantidadeFilhosContainer" style="display: none;">
+    <label>Quantidade de filhos:
+    <input name="quantidadeFilhos" type="number" min="0" value="0">
+    </label>
+    </div>
 
-    <section class="map-and-hosting-section">
-        <div class="footer-map">
-            <h2>ONDE É A FESTA</h2>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d3944.2377556927067!2d-35.071308!3d-8.668925!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwNDAnMDguMSJTIDM1wrAwNCcxNi43Ilc!5e0!3m2!1spt-BR!2sus!4v1750690734067!5m2!1spt-BR!2sus" width="100%" height="300" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
+    <button type="submit">Confirmar Presença</button>
+    </form>
+    <p id="msg"></p>
 
-        <div class="hosting-info-panel">
-            <h2>INDICAÇÃO DE HOSPEDAGEM</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Local</th>
-                        <th>Contato</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Chales Pousada</td>
-                        <td>81 99961-5539</td>
-                    </tr>
-                    <tr>
-                        <td>Pousada Marly</td>
-                        <td>81 98530-2627</td>
-                    </tr>
-                    <tr>
-                        <td>Aluguel Casa 01 (3 quartos)</td>
-                        <td>81 99178-9978</td>
-                    </tr>
-                    <tr>
-                        <td>Aluguel Casa 02 (4 quartos)</td>
-                        <td>81 99164-5937</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+    <div class="button-group">
+    <button id="add-to-calendar" class="add-to-calendar-button">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Calendar_icon_%282020%29.svg" alt="Ícone Google Agenda">
+    <span>Adicionar à Agenda</span>
+    </button>
+    </div>
+    </div>
+  </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+</main>
 
-    <script defer>
-      // Função para gerar o link do Google Agenda
-      function generateGoogleCalendarLink(eventName, eventDate, eventTime) {
-          const baseUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE";
-          const details = encodeURIComponent("Venha celebrar meu aniversário! Haverá muita comida, bebida e diversão. Não perca!");
-          const location = encodeURIComponent("Aver o Mar – Sirinhaém");
+<footer class="final-message">
+<img src="https://i.imgur.com/gDZikuL.png" style="max-width: 85%;" loading="lazy">
+</footer>
 
-          const startDateTime = new Date('2025-07-19T12:00:00');
-          const endDateTime = new Date('2025-07-19T18:00:00');
+<section class="map-and-hosting-section">
+  <div class="footer-map">
+  <h2>ONDE É A FESTA</h2>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d3944.2377556927067!2d-35.071308!3d-8.668925!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwNDAnMDguMSJTIDM1wrAwNCcxNi43Ilc!5e0!3m2!1spt-BR!2sus!4v1750690734067!5m2!1spt-BR!2sus" width="100%" height="300" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
 
-          const formatToGoogleCalendarTime = (date) => {
-              const year = date.getFullYear();
-              const month = (date.getMonth() + 1).toString().padStart(2, '0');
-              const day = date.getDate().toString().padStart(2, '0');
-              const hours = date.getHours().toString().padStart(2, '0');
-              const minutes = date.getMinutes().toString().padStart(2, '0');
-              const seconds = date.getSeconds().toString().padStart(2, '0');
-              return `${year}${month}${day}T${hours}${minutes}${seconds}`;
-          };
+  <div class="hosting-info-panel">
+  <h2>INDICAÇÃO DE HOSPEDAGEM</h2>
+  <table>
+  <thead>
+  <tr>
+  <th>Local</th>
+  <th>Contato</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>Chales Pousada</td>
+  <td>81 99961-5539</td>
+  </tr>
+  <tr>
+  <td>Pousada Marly</td>
+  <td>81 98530-2627</td>
+  </tr>
+  <tr>
+  <td>Aluguel Casa 01 (3 quartos)</td>
+  <td>81 99178-9978</td>
+  </tr>
+  <tr>
+  <td>Aluguel Casa 02 (4 quartos)</td>
+  <td>81 99164-5937</td>
+  </tr>
+  </tbody>
+  </table>
+  </div>
+</section>
 
-          const dates = `${formatToGoogleCalendarTime(startDateTime)}/${formatToGoogleCalendarTime(endDateTime)}`;
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
 
-          const link = `${baseUrl}&text=${encodeURIComponent(eventName)}&dates=${dates}&details=${details}&location=${location}&sf=true&output=xml`;
-          return link;
-      }
+<script defer>
+// Função para gerar o link do Google Agenda
+function generateGoogleCalendarLink(eventName, eventDate, eventTime) {
+const baseUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE";
+const details = encodeURIComponent("Venha celebrar meu aniversário! Haverá muita comida, bebida e diversão. Não perca!");
+const location = encodeURIComponent("Aver o Mar – Sirinhaém");
 
-      // Função para disparar os confetes
-      function triggerConfetti() {
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
-        setTimeout(() => {
-          confetti({
-            particleCount: 75,
-            spread: 80,
-            origin: { y: 0.6 }
-          });
-        }, 200);
-        setTimeout(() => {
-          confetti({
-            particleCount: 50,
-            spread: 90,
-            origin: { y: 0.6 }
-          });
-        }, 400);
-      }
+const startDateTime = new Date('2025-07-19T12:00:00');
+const endDateTime = new Date('2025-07-19T18:00:00');
 
-      // Lógica para mostrar/esconder o campo de quantidade de filhos
-      const possuiFilhosSim = document.getElementById('possuiFilhosSim');
-      const possuiFilhosNao = document.getElementById('possuiFilhosNao');
-      const quantidadeFilhosContainer = document.getElementById('quantidadeFilhosContainer');
-      const quantidadeFilhosInput = quantidadeFilhosContainer.querySelector('input[name="quantidadeFilhos"]');
+const formatToGoogleCalendarTime = (date) => {
+const year = date.getFullYear();
+const month = (date.getMonth() + 1).toString().padStart(2, '0');
+const day = date.getDate().toString().padStart(2, '0');
+const hours = date.getHours().toString().padStart(2, '0');
+const minutes = date.getMinutes().toString().padStart(2, '0');
+const seconds = date.getSeconds().toString().padStart(2, '0');
+return `${year}${month}${day}T${hours}${minutes}${seconds}`;
+};
 
-      function toggleQuantidadeFilhos() {
-        if (possuiFilhosSim.checked) {
-          quantidadeFilhosContainer.style.display = 'block';
-          quantidadeFilhosInput.setAttribute('required', 'required'); // Torna o campo obrigatório
-        } else {
-          quantidadeFilhosContainer.style.display = 'none';
-          quantidadeFilhosInput.removeAttribute('required'); // Remove a obrigatoriedade
-          quantidadeFilhosInput.value = '0'; // Zera o valor quando "Não" é selecionado
-        }
-      }
+const dates = `${formatToGoogleCalendarTime(startDateTime)}/${formatToGoogleCalendarTime(endDateTime)}`;
 
-      possuiFilhosSim.addEventListener('change', toggleQuantidadeFilhos);
-      possuiFilhosNao.addEventListener('change', toggleQuantidadeFilhos);
-      // Chama a função uma vez ao carregar a página para definir o estado inicial
-      document.addEventListener('DOMContentLoaded', toggleQuantidadeFilhos);
+const link = `${baseUrl}&text=${encodeURIComponent(eventName)}&dates=${dates}&details=${details}&location=${location}&sf=true&output=xml`;
+return link;
+}
+
+// Função para disparar os confetes
+function triggerConfetti() {
+confetti({
+particleCount: 100,
+spread: 70,
+origin: { y: 0.6 }
+});
+setTimeout(() => {
+confetti({
+particleCount: 75,
+spread: 80,
+origin: { y: 0.6 }
+});
+}, 200);
+setTimeout(() => {
+confetti({
+particleCount: 50,
+spread: 90,
+origin: { y: 0.6 }
+});
+}, 400);
+}
+
+// Lógica para mostrar/esconder o campo de quantidade de filhos
+const possuiFilhosSim = document.getElementById('possuiFilhosSim');
+const possuiFilhosNao = document.getElementById('possuiFilhosNao');
+const quantidadeFilhosContainer = document.getElementById('quantidadeFilhosContainer');
+const quantidadeFilhosInput = quantidadeFilhosContainer.querySelector('input[name="quantidadeFilhos"]');
+
+function toggleQuantidadeFilhos() {
+if (possuiFilhosSim.checked) {
+quantidadeFilhosContainer.style.display = 'block';
+quantidadeFilhosInput.setAttribute('required', 'required'); // Torna o campo obrigatório
+} else {
+quantidadeFilhosContainer.style.display = 'none';
+quantidadeFilhosInput.removeAttribute('required'); // Remove a obrigatoriedade
+quantidadeFilhosInput.value = '0'; // Zera o valor quando "Não" é selecionado
+}
+}
+
+possuiFilhosSim.addEventListener('change', toggleQuantidadeFilhos);
+possuiFilhosNao.addEventListener('change', toggleQuantidadeFilhos);
+// Chama a função uma vez ao carregar a página para definir o estado inicial
+document.addEventListener('DOMContentLoaded', toggleQuantidadeFilhos);
 
 
-      // Event listener para o formulário de confirmação
-      document.getElementById('form-confirmacao').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const formData = new FormData(this);
-        const data = {};
+// Event listener para o formulário de confirmação
+document.getElementById('form-confirmacao').addEventListener('submit', async function(e) {
+e.preventDefault();
+const formData = new FormData(this);
+const data = {};
 
-        // Coleta todos os dados do formulário
-        formData.forEach((v, k) => {
-            if (k === 'quantidadeFilhos' && v === '0' && possuiFilhosNao.checked) {
-                // Se "Não" tem filhos e a quantidade é 0, não inclua "quantidadeFilhos" na data,
-                // ou inclua como uma string vazia/nulo para melhor representação na planilha
-                data[k] = ''; // ou null, ou "N/A"
-            } else {
-                data[k] = v;
-            }
-        });
+// Coleta todos os dados do formulário
+formData.forEach((v, k) => {
+if (k === 'quantidadeFilhos' && v === '0' && possuiFilhosNao.checked) {
+// Se "Não" tem filhos e a quantidade é 0, não inclua "quantidadeFilhos" na data,
+// ou inclua como uma string vazia/nulo para melhor representação na planilha
+data[k] = ''; // ou null, ou "N/A"
+} else {
+data[k] = v;
+}
+});
 
-        // Adiciona o status "Possui Filhos?" explicitamente
-        data.possuiFilhos = possuiFilhosSim.checked ? 'Sim' : 'Não';
+// Adiciona o status "Possui Filhos?" explicitamente
+data.possuiFilhos = possuiFilhosSim.checked ? 'Sim' : 'Não';
 
-        const msgElement = document.getElementById('msg');
-        msgElement.innerText = "Enviando confirmação...";
+const msgElement = document.getElementById('msg');
+msgElement.innerText = "Enviando confirmação...";
 
-        try {
-          const response = await fetch('/api/submit-form', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          });
+try {
+const response = await fetch('/api/submit-form', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify(data)
+});
 
-          const result = await response.json();
+const result = await response.json();
 
-          if (response.ok && result.success) {
-            msgElement.innerText = "Presença confirmada na planilha, espero você lá!";
-            this.reset();
-            toggleQuantidadeFilhos(); // Redefine o estado do campo de filhos após resetar o form
-            triggerConfetti();
-          } else {
-            msgElement.innerText = `Ocorreu um problema ao confirmar presença: ${result.message || 'Erro desconhecido.'}`;
-            console.error('Erro ao confirmar presença:', result.message || 'Erro desconhecido.');
-          }
-        } catch (error) {
-          msgElement.innerText = `Erro na requisição: ${error.message}`;
-          console.error('Erro ao enviar formulário:', error);
-        }
-      });
+if (response.ok && result.success) {
+msgElement.innerText = "Presença confirmada na planilha, espero você lá!";
+this.reset();
+toggleQuantidadeFilhos(); // Redefine o estado do campo de filhos após resetar o form
+triggerConfetti();
+} else {
+msgElement.innerText = `Ocorreu um problema ao confirmar presença: ${result.message || 'Erro desconhecido.'}`;
+console.error('Erro ao confirmar presença:', result.message || 'Erro desconhecido.');
+}
+} catch (error) {
+msgElement.innerText = `Erro na requisição: ${error.message}`;
+console.error('Erro ao enviar formulário:', error);
+}
+});
 
-      // Event listener para o botão "Adicionar à Agenda"
-      document.getElementById('add-to-calendar').addEventListener('click', function() {
-          const eventName = "Aniversário do Manoel Gonçalves";
-          const calendarLink = generateGoogleCalendarLink(eventName);
-          window.open(calendarLink, '_blank');
-      });
-    </script>
+// Event listener para o botão "Adicionar à Agenda"
+document.getElementById('add-to-calendar').addEventListener('click', function() {
+const eventName = "Aniversário do Manoel Gonçalves";
+const calendarLink = generateGoogleCalendarLink(eventName);
+window.open(calendarLink, '_blank');
+});
+</script>
 </body>
 </html>
