@@ -1,60 +1,99 @@
 const { GoogleAuth } = require('google-auth-library');
 const { google } = require('googleapis');
 
+// ---- INÍCIO DO CÓDIGO DE DEBUG ----
+console.log('✅ Arquivo /api/submit-form.js foi carregado.');
+
+// Print para verificar se as variáveis de ambiente foram carregadas
+// ATENÇÃO: A chave privada é muito longa, então vamos imprimir apenas o início e o fim.
+console.log('--- Verificando Variáveis de Ambiente ---');
+console.log('GOOGLE_CLIENT_EMAIL:', process.env.GOOGLE_CLIENT_EMAIL ? 'Carregado ✅' : 'NÃO ENCONTRADO ❌');
+console.log('GOOGLE_SHEET_ID:', process.env.GOOGLE_SHEET_ID ? 'Carregado ✅' : 'NÃO ENCONTRADO ❌');
+if (process.env.GOOGLE_PRIVATE_KEY) {
+    console.log('GOOGLE_PRIVATE_KEY: Carregada ✅ (Inicia com:', process.env.GOOGLE_PRIVATE_KEY.substring(0, 30), '...)');
+} else {
+    console.log('GOOGLE_PRIVATE_KEY: NÃO ENCONTRADA ❌');
+}
+console.log('-------------------------------------\n');
+// ---- FIM DO CÓDIGO DE DEBUG ----
+
+
 module.exports = async (req, res) => {
+  // ---- INÍCIO DO CÓDIGO DE DEBUG ----
+  console.log(`\n\n--- NOVA REQUISIÇÃO RECEBIDA: ${new Date().toLocaleTimeString()} ---`);
+  console.log('Método HTTP:', req.method);
+  // ---- FIM DO CÓDIGO DE DEBUG ----
+
   if (req.method !== 'POST') {
-    return res.status(405).json({ success: false, message: 'Método não permitido.' });
-  }
+    console.log('❌ Erro: Método não é POST. Retornando 405.');
+    return res.status(405).json({ success: false, message: 'Método não permitido.' });
+  }
 
-  // Desestruturar os novos campos
-  const { nome, telefone, email, possuiFilhos, quantidadeFilhos } = req.body;
+  // ---- INÍCIO DO CÓDIGO DE DEBUG ----
+  console.log('➡️ Corpo da Requisição (req.body):', JSON.stringify(req.body, null, 2));
+  // ---- FIM DO CÓDIGO DE DEBUG ----
 
-  if (!nome || !telefone || !email || !possuiFilhos) { // 'quantidadeFilhos' é opcional dependendo de 'possuiFilhos'
-    return res.status(400).json({ success: false, message: 'Nome, telefone, e-mail e "Possui filhos?" são obrigatórios.' });
-  }
+  const { nome, telefone, email, possuiFilhos, quantidadeFilhos } = req.body;
 
-  try {
-    const auth = new GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-      },
-      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-    });
+  if (!nome || !telefone || !email || !possuiFilhos) {
+    console.log('❌ Erro: Campos obrigatórios faltando.');
+    return res.status(400).json({ success: false, message: 'Nome, telefone, e-mail e "Possui filhos?" são obrigatórios.' });
+  }
 
-    const sheets = google.sheets({ version: 'v4', auth });
+  try {
+    console.log('➡️  1. Iniciando autenticação com o Google...');
+    const auth = new GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      },
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
+    console.log('✅ 1. Autenticação configurada.');
 
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-    // AJUSTE AQUI: O range agora precisa cobrir todas as colunas (Nome, Telefone, Email, Possui Filhos?, Quantidade Filhos, Data/Hora)
-    // Se você tiver 6 colunas, será A:F
-    const range = 'Página1!A:F'; // <--- VERIFIQUE E AJUSTE ESTE RANGE CONFORME SUAS COLUNAS NA PLANILHA
+    console.log('➡️  2. Conectando com a API do Google Sheets...');
+    const sheets = google.sheets({ version: 'v4', auth });
+    console.log('✅ 2. Conexão com a API estabelecida.');
 
-    // Adicionar os novos campos aos valores que serão inseridos na planilha
-    // O valor de 'quantidadeFilhos' pode ser null/vazio se "Não" for selecionado
-    const finalQuantidadeFilhos = (possuiFilhos === 'Sim') ? quantidadeFilhos : ''; // Envia vazio se não tiver filhos
+    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    const range = 'Página1!A:F';
 
-    const values = [[
-      nome,
-      telefone,
-      email,
-      possuiFilhos,        // Novo campo
-      finalQuantidadeFilhos, // Novo campo
-      new Date().toLocaleString('pt-BR')
-    ]];
+    const finalQuantidadeFilhos = (possuiFilhos === 'Sim') ? quantidadeFilhos : '';
 
-    await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range,
-      valueInputOption: 'USER_ENTERED',
-      resource: {
-        values: values,
-      },
-    });
+    const values = [[
+      nome,
+      telefone,
+      email,
+      possuiFilhos,
+      finalQuantidadeFilhos,
+      new Date().toLocaleString('pt-BR')
+    ]];
 
-    res.status(200).json({ success: true, message: 'Dados salvos na planilha com sucesso!' });
+    console.log('➡️  3. Preparando para enviar os seguintes dados para a planilha:', values);
 
-  } catch (error) {
-    console.error('Erro ao salvar na planilha:', error);
-    res.status(500).json({ success: false, message: 'Erro interno do servidor ao salvar os dados.' });
-  }
+    await sheets.spreadsheets.values.append({
+      spreadsheetId,
+      range,
+      valueInputOption: 'USER_ENTERED',
+      resource: {
+        values: values,
+      },
+    });
+    console.log('✅ 3. Dados enviados para a planilha com sucesso!');
+
+    console.log('➡️  4. Enviando resposta de sucesso (200) para o navegador.');
+    res.status(200).json({ success: true, message: 'Dados salvos na planilha com sucesso!' });
+
+  } catch (error) {
+    // ---- INÍCIO DO CÓDIGO DE DEBUG ----
+    console.error('\n\n🚨🚨🚨 ERRO CRÍTICO NO BLOCO CATCH 🚨🚨🚨');
+    console.error('Ocorreu um erro ao tentar se comunicar com a API do Google.');
+    console.error('Mensagem do Erro:', error.message);
+    console.error('--- Detalhes completos do Erro ---');
+    console.error(error);
+    console.error('🚨🚨🚨 FIM DO ERRO 🚨🚨🚨\n');
+    // ---- FIM DO CÓDIGO DE DEBUG ----
+
+    res.status(500).json({ success: false, message: 'Erro interno do servidor ao salvar os dados.' });
+  }
 };
