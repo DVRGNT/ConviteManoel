@@ -204,51 +204,59 @@ document.addEventListener('DOMContentLoaded', toggleQuantidadeFilhos);
 
 // Event listener para o formulário de confirmação
 document.getElementById('form-confirmacao').addEventListener('submit', async function(e) {
-e.preventDefault();
-const formData = new FormData(this);
-const data = {};
+    e.preventDefault();
+    const formData = new FormData(this);
+    const data = {};
 
-// Coleta todos os dados do formulário
-formData.forEach((v, k) => {
-if (k === 'quantidadeFilhos' && v === '0' && possuiFilhosNao.checked) {
-// Se "Não" tem filhos e a quantidade é 0, não inclua "quantidadeFilhos" na data,
-// ou inclua como uma string vazia/nulo para melhor representação na planilha
-data[k] = ''; // ou null, ou "N/A"
-} else {
-data[k] = v;
-}
-});
+    // Coleta todos os dados do formulário
+    formData.forEach((v, k) => {
+        data[k] = v;
+    });
 
-// Adiciona o status "Possui Filhos?" explicitamente
-data.possuiFilhos = possuiFilhosSim.checked ? 'Sim' : 'Não';
+    // Garante que o valor de 'possuiFilhos' está correto
+    data.possuiFilhos = document.getElementById('possuiFilhosSim').checked ? 'Sim' : 'Não';
+    
+    // Limpa a quantidade de filhos se a resposta for "Não"
+    if (data.possuiFilhos === 'Não') {
+        data.quantidadeFilhos = '';
+    }
 
-const msgElement = document.getElementById('msg');
-msgElement.innerText = "Enviando confirmação...";
+    const msgElement = document.getElementById('msg');
+    const submitButton = this.querySelector('button[type="submit"]');
+    msgElement.innerText = "Enviando confirmação...";
+    submitButton.disabled = true; // Desabilita o botão para evitar envios duplos
 
-try {
-const response = await fetch('/api/submit-form', {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify(data)
-});
+    try {
+        // CORREÇÃO: Adicionado .js ao final do endpoint da API
+        const response = await fetch('/api/submit-form.js', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-const result = await response.json();
+        // Tenta ler a resposta como JSON, mesmo que tenha erro, para ver a mensagem do servidor
+        const resultText = await response.text();
+        const result = JSON.parse(resultText); // O erro "Unexpected end of JSON" acontecia aqui
 
-if (response.ok && result.success) {
-msgElement.innerText = "Presença confirmada na planilha, espero você lá!";
-this.reset();
-toggleQuantidadeFilhos(); // Redefine o estado do campo de filhos após resetar o form
-triggerConfetti();
-} else {
-msgElement.innerText = `Ocorreu um problema ao confirmar presença: ${result.message || 'Erro desconhecido.'}`;
-console.error('Erro ao confirmar presença:', result.message || 'Erro desconhecido.');
-}
-} catch (error) {
-msgElement.innerText = `Erro na requisição: ${error.message}`;
-console.error('Erro ao enviar formulário:', error);
-}
+        if (response.ok && result.success) {
+            msgElement.innerText = "Presença confirmada, espero você lá!";
+            this.reset();
+            toggleQuantidadeFilhos(); // Redefine o estado do campo de filhos
+            triggerConfetti(); // Uhuuul!
+        } else {
+            // Usa a mensagem de erro retornada pela sua API
+            msgElement.innerText = `Erro: ${result.message || 'Não foi possível confirmar.'}`;
+            console.error('Erro retornado pela API:', result);
+        }
+    } catch (error) {
+        // Captura erros de rede ou erros de parsing do JSON
+        msgElement.innerText = 'Ocorreu um erro ao enviar. Tente novamente.';
+        console.error('Erro ao enviar formulário:', error);
+    } finally {
+        submitButton.disabled = false; // Reabilita o botão
+    }
 });
 
 // Event listener para o botão "Adicionar à Agenda"
