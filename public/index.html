@@ -43,45 +43,9 @@
 
   <section class="form-section">
     <div class="form-content">
-    <h2>CONFIRME SUA PRESENÇA</h2>
-    <form id="form-confirmacao">
-    <label>Nome:
-    <input name="nome" type="text" required>
-    </label>
-    <label>Telefone:
-    <input name="telefone" type="tel" required>
-    </label>
-    <label>E-mail:
-    <input name="email" type="email" required>
-    </label>
+    
+    <a href="https://forms.gle/MXDdM7BCrbHTFFgB8" target="_blank" class="confirm-presence-button">Confirmar Presença</a>
 
-    <div class="form-group-filhos">
-    <label>Possui filhos?</label>
-    <div class="radio-options">
-    <label>
-    <input type="radio" name="possuiFilhos" value="Sim" id="possuiFilhosSim"> Sim
-    </label>
-    <label>
-    <input type="radio" name="possuiFilhos" value="Não" id="possuiFilhosNao" checked> Não
-    </label>
-    </div>
-    </div>
-    <div id="quantidadeFilhosContainer" style="display: none;">
-    <label>Quantidade de filhos:
-    <input name="quantidadeFilhos" type="number" min="0" value="0">
-    </label>
-    </div>
-
-    <button type="submit">Confirmar Presença</button>
-    </form>
-    <p id="msg"></p>
-
-    <div class="button-group">
-    <button id="add-to-calendar" class="add-to-calendar-button">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Calendar_icon_%282020%29.svg" alt="Ícone Google Agenda">
-    <span>Adicionar à Agenda</span>
-    </button>
-    </div>
     </div>
   </section>
 
@@ -94,7 +58,7 @@
 <section class="map-and-hosting-section">
   <div class="footer-map">
   <h2>ONDE É A FESTA</h2>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d3944.2377556927067!2d-35.071308!3d-8.668925!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwNDAnMDguMSJTIDM1wrAwNCcxNi43Ilc!5e0!3m2!1spt-BR!2sus!4v1750690734067!5m2!1spt-BR!2sus" width="100%" height="300" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d3944.2377556927067!2d-35.071308!3d-8.668925!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwNDAnMDguMSJTIDM1wrAwNCcxNi43Ilc!5e0!3m2!1spt-BR!2sus!4v1750690734067!5m2!1spt-BR!2sus" width="100%" height="300" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 
   <div class="hosting-info-panel">
@@ -128,8 +92,6 @@
   </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
-
 <script defer>
 // Função para gerar o link do Google Agenda
 function generateGoogleCalendarLink(eventName, eventDate, eventTime) {
@@ -155,109 +117,6 @@ const dates = `${formatToGoogleCalendarTime(startDateTime)}/${formatToGoogleCale
 const link = `${baseUrl}&text=${encodeURIComponent(eventName)}&dates=${dates}&details=${details}&location=${location}&sf=true&output=xml`;
 return link;
 }
-
-// Função para disparar os confetes
-function triggerConfetti() {
-confetti({
-particleCount: 100,
-spread: 70,
-origin: { y: 0.6 }
-});
-setTimeout(() => {
-confetti({
-particleCount: 75,
-spread: 80,
-origin: { y: 0.6 }
-});
-}, 200);
-setTimeout(() => {
-confetti({
-particleCount: 50,
-spread: 90,
-origin: { y: 0.6 }
-});
-}, 400);
-}
-
-// Lógica para mostrar/esconder o campo de quantidade de filhos
-const possuiFilhosSim = document.getElementById('possuiFilhosSim');
-const possuiFilhosNao = document.getElementById('possuiFilhosNao');
-const quantidadeFilhosContainer = document.getElementById('quantidadeFilhosContainer');
-const quantidadeFilhosInput = quantidadeFilhosContainer.querySelector('input[name="quantidadeFilhos"]');
-
-function toggleQuantidadeFilhos() {
-if (possuiFilhosSim.checked) {
-quantidadeFilhosContainer.style.display = 'block';
-quantidadeFilhosInput.setAttribute('required', 'required'); // Torna o campo obrigatório
-} else {
-quantidadeFilhosContainer.style.display = 'none';
-quantidadeFilhosInput.removeAttribute('required'); // Remove a obrigatoriedade
-quantidadeFilhosInput.value = '0'; // Zera o valor quando "Não" é selecionado
-}
-}
-
-possuiFilhosSim.addEventListener('change', toggleQuantidadeFilhos);
-possuiFilhosNao.addEventListener('change', toggleQuantidadeFilhos);
-// Chama a função uma vez ao carregar a página para definir o estado inicial
-document.addEventListener('DOMContentLoaded', toggleQuantidadeFilhos);
-
-
-// Event listener para o formulário de confirmação
-document.getElementById('form-confirmacao').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const data = {};
-
-    // Coleta todos os dados do formulário
-    formData.forEach((v, k) => {
-        data[k] = v;
-    });
-
-    // Garante que o valor de 'possuiFilhos' está correto
-    data.possuiFilhos = document.getElementById('possuiFilhosSim').checked ? 'Sim' : 'Não';
-    
-    // Limpa a quantidade de filhos se a resposta for "Não"
-    if (data.possuiFilhos === 'Não') {
-        data.quantidadeFilhos = '';
-    }
-
-    const msgElement = document.getElementById('msg');
-    const submitButton = this.querySelector('button[type="submit"]');
-    msgElement.innerText = "Enviando confirmação...";
-    submitButton.disabled = true; // Desabilita o botão para evitar envios duplos
-
-    try {
-        // CORREÇÃO: Adicionado .js ao final do endpoint da API
-        const response = await fetch('/api/submit-form.js', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        // Tenta ler a resposta como JSON, mesmo que tenha erro, para ver a mensagem do servidor
-        const resultText = await response.text();
-        const result = JSON.parse(resultText); // O erro "Unexpected end of JSON" acontecia aqui
-
-        if (response.ok && result.success) {
-            msgElement.innerText = "Presença confirmada, espero você lá!";
-            this.reset();
-            toggleQuantidadeFilhos(); // Redefine o estado do campo de filhos
-            triggerConfetti(); // Uhuuul!
-        } else {
-            // Usa a mensagem de erro retornada pela sua API
-            msgElement.innerText = `Erro: ${result.message || 'Não foi possível confirmar.'}`;
-            console.error('Erro retornado pela API:', result);
-        }
-    } catch (error) {
-        // Captura erros de rede ou erros de parsing do JSON
-        msgElement.innerText = 'Ocorreu um erro ao enviar. Tente novamente.';
-        console.error('Erro ao enviar formulário:', error);
-    } finally {
-        submitButton.disabled = false; // Reabilita o botão
-    }
-});
 
 // Event listener para o botão "Adicionar à Agenda"
 document.getElementById('add-to-calendar').addEventListener('click', function() {
